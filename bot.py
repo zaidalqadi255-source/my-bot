@@ -4,7 +4,7 @@ from telegram import Update, ChatMember
 from telegram.ext import Application, ChatMemberHandler, ContextTypes
 
 # --- 1. CONFIGURATION ---
-TELEGRAM_TOKEN = "8347518330:AAF6Y8ioMA7qBlJu7g-6L0_Ix3dJv8w2n5c"
+TELEGRAM_TOKEN = "8347518330:AAHp5I8rlfx6sgb51I59ktcF8acxBZTWRAo"
 SIGHTENGINE_USER = "399304305"
 SIGHTENGINE_SECRET = "ZBiC5s4SQJe4ZS9LpFkPkziHDNx93tDa"
 
