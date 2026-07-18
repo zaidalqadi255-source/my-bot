@@ -5,9 +5,9 @@ from telegram.ext import Application, ChatMemberHandler, ContextTypes
 from langdetect import detect, LangDetectException  # استدعاء مكتبة كشف اللغات
 
 # --- حط أرقامك السرية هون بين علامات التنصيص ---
-TELEGRAM_TOKEN = "التوكن_تبع_تيليجرام_هون"
-SIGHTENGINE_API_USER = "رقم_اليوزر_تبع_sightengine"
-SIGHTENGINE_API_SECRET = "الرقم_السري_تبع_sightengine"
+TELEGRAM_TOKEN = "8347518330:AAHp5I8rlfx6sgb51I59ktcF8acxBZTWRAo"
+SIGHTENGINE_API_USER = "399304305"
+SIGHTENGINE_API_SECRET = "ZBiC5s4SQJe4ZS9LpFkPkziHDNx93tDa"
 # -----------------------------------------------
 
 async def check_image_with_sightengine(image_url: str) -> bool:
