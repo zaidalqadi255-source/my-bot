@@ -71,17 +71,7 @@ async def handle_channel_member(update: Update, context: ContextTypes.DEFAULT_TY
                 print(f"Banned {user.id} - No username")
                 return 
 
-            # 2. الشرط الثاني: فحص البايو (تم عزله بأمان)
-            try:
-                user_info = await context.bot.get_chat(user.id)
-                if user_info.bio:
-                    bio_lang = detect(user_info.bio)
-                    if bio_lang not in ['ar', 'en']:
-                        await context.bot.ban_chat_member(chat.id, user.id)
-                        print(f"Banned {user.id} - Bio language: {bio_lang}")
-                        return
-            except Exception as e:
-                print(f"Bio check skipped for {user.id} (Telegram restriction)")
+        
             
             # 3. الشرط الثالث: فحص الصورة الشخصية 
             photos = await context.bot.get_user_profile_photos(user.id)
