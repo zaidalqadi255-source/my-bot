@@ -4,7 +4,6 @@ from threading import Thread
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from telegram import Update, ChatMember
 from telegram.ext import Application, ChatMemberHandler, ContextTypes
-from langdetect import detect
 
 # --- حط أرقامك السرية هون بين علامات التنصيص ---
 TELEGRAM_TOKEN = "8347518330:AAHp5I8rlfx6sgb51I59ktcF8acxBZTWRAo"
@@ -61,7 +60,7 @@ async def handle_channel_member(update: Update, context: ContextTypes.DEFAULT_TY
     old_status = result.old_chat_member.status
     user = result.new_chat_member.user
     
-    # التأكد إن العضو دخل القناة للتو (تغيرت حالته إلى عضو)
+    # التأكد إن العضو دخل القناة للتو
     if new_status == ChatMember.MEMBER and old_status != ChatMember.MEMBER:
         print(f"New user detected: {user.first_name} (ID: {user.id})")
         try:
@@ -71,9 +70,9 @@ async def handle_channel_member(update: Update, context: ContextTypes.DEFAULT_TY
                 print(f"Banned {user.id} - No username")
                 return 
 
-        
+            # ** تم إيقاف فحص البايو مؤقتاً لحل مشكلة الحظر العشوائي **
             
-            # 3. الشرط الثالث: فحص الصورة الشخصية 
+            # 2. الشرط الثاني: فحص الصورة الشخصية 
             photos = await context.bot.get_user_profile_photos(user.id)
             if photos.total_count > 0:
                 photo = photos.photos[0][-1]
@@ -88,16 +87,14 @@ async def handle_channel_member(update: Update, context: ContextTypes.DEFAULT_TY
             print(f"Error processing new member: {e}")
 
 def main():
-    # 1. تشغيل الخادم الوهمي في الخلفية
     t = Thread(target=run_dummy_server)
     t.daemon = True
     t.start()
 
-    # 2. تشغيل البوت
     app = Application.builder().token(TELEGRAM_TOKEN).build()
     app.add_handler(ChatMemberHandler(handle_channel_member, ChatMemberHandler.CHAT_MEMBER))
     
-    print("Bot and Web Server are running...")
+    print("Bot and Web Server are running (Bio check disabled)...")
     app.run_polling(allowed_updates=Update.ALL_TYPES)
 
 if __name__ == '__main__':
